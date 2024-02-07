@@ -63,14 +63,18 @@ def write_vtt(transcript: Iterator[dict], file: TextIO,
     print("WEBVTT\n", file=file)
 
     for segment in iterator:
-        text = segment['text'].replace('-->', '->')
+        try:
+            text = segment['text'].replace('-->', '->')
 
-        print(
-            f"{format_timestamp(segment['start'])} --> {format_timestamp(segment['end'])}\n"
-            f"{text}\n",
-            file=file,
-            flush=True,
-        )
+            print(
+                f"{format_timestamp(segment['start'])} --> {format_timestamp(segment['end'])}\n"
+                f"{text}\n",
+                file=file,
+                flush=True,
+            )
+        except Exception as e:
+            print(f"Error writing segment {segment}: {e}")
+            raise
 
 def write_srt(transcript: Iterator[dict], file: TextIO, 
               maxLineWidth=None, highlight_words: bool = False):

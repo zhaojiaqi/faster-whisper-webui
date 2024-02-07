@@ -2,6 +2,7 @@ ctranslate2
 faster-whisper
 ffmpeg-python==0.2.0
 gradio==3.38.0
+gradio-client==0.8.1
 yt-dlp
 json5
 torch

@@ -501,16 +501,20 @@ class WhisperTranscriber:
         language = result["language"] if "language" in result else None
         languageMaxLineWidth = self.__get_max_line_width(language)
 
+        # We always create the JSON file for debugging purposes
+        json_result = json.dumps(result, indent=4, ensure_ascii=False)
+        json_file = self.__create_file(json_result, output_dir, source_name + "-result.json")
+        print("Created JSON file " + json_file)
+
         print("Max line width " + str(languageMaxLineWidth))
         vtt = self.__get_subs(result["segments"], "vtt", languageMaxLineWidth, highlight_words=highlight_words)
         srt = self.__get_subs(result["segments"], "srt", languageMaxLineWidth, highlight_words=highlight_words)
-        json_result = json.dumps(result, indent=4, ensure_ascii=False)
 
         output_files = []
         output_files.append(self.__create_file(srt, output_dir, source_name + "-subs.srt"));
         output_files.append(self.__create_file(vtt, output_dir, source_name + "-subs.vtt"));
         output_files.append(self.__create_file(text, output_dir, source_name + "-transcript.txt"));
-        output_files.append(self.__create_file(json_result, output_dir, source_name + "-result.json"));
+        output_files.append(json_file)
 
         return output_files, text, vtt
 
