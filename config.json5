@@ -84,11 +84,11 @@
     // A commma delimited list of CUDA devices to use for parallel processing. If None, disable parallel processing.
     "vad_parallel_devices": "",
     // The number of CPU cores to use for VAD pre-processing.
-    "vad_cpu_cores": 1,
+    "vad_cpu_cores": 4,
     // The number of seconds before inactivate processes are terminated. Use 0 to close processes immediately, or None for no timeout.
-    "vad_process_timeout": 1800,
+    "vad_process_timeout": null,
     // True to use all available GPUs and CPU cores for processing. Use vad_cpu_cores/vad_parallel_devices to specify the number of CPU cores/GPUs to use.
-    "auto_parallel": false,
+    "auto_parallel": true,
     // Directory to save the outputs (CLI will use the current directory if not specified)
     "output_dir": null,
     // The path to save model files; uses ~/.cache/whisper by default
